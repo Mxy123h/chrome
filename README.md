@@ -33,3 +33,19 @@ It is recommended to `docker pull siomiz/chrome` and restart the container once 
 
   [1]: https://www.google.com/intl/en/chrome/browser/privacy/eula_text.html
   [2]: https://code.google.com/p/chromium/issues/detail?id=490964
+
+`docker run -p 5900:5900 -d mxy123h/chrome`
+
+Add passwd:
+--
+```
+apt update
+apt install -y vim
+su chrome
+x11vnc -storepasswd
+vim /etc/supervisor/conf.d/supervisord.conf
+```
+command=/usr/bin/x11vnc **-rfbauth /home/chrome/.vnc/passwd** -display :1 %(ENV_X11VNC_AUTH)s -wait 5 -forever -xrandr
+
+and restart containers 
+
